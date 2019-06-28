@@ -51,7 +51,7 @@ cd pytorch-CycleGAN-and-pix2pix
 The provided code shows an example usage of the Griffin and Lim algorithm. It loads an audio file, computes the spectrogram, optionally performs low-pass filtering by zeroing all frequency bins above some cutoff frequency, and then uses the Griffin and Lim algorithm to reconstruct an audio signal from the modified spectrogram. Finally, both the reconstructed audio signal and the spectrogram plot figure are saved to a file.
 
 ```bash
-python3 build-melspec-from-wav.py --in_file ../data/CN221s3_219.wav --sample_rate_hz 16000 --fft_size 512 --overlap_ratio 3 --mel_bin_count 128 --max_freq_hz 5000 --pad_length 24000
+python3 build-melspec-from-wav.py --in_file ../data/CN111s3_297.wav --sample_rate_hz 16000 --fft_size 512 --overlap_ratio 3 --mel_bin_count 128 --max_freq_hz 5000 --pad_length 24000
 ```
 It generates 128x128 gray and colour spectrogram images. 
 
