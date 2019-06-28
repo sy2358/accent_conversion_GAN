@@ -44,7 +44,6 @@ pip install -r requirements.txt
 git clone https://github.com/sy2358/pytorch-CycleGAN-and-pix2pix
 cd pytorch-CycleGAN-and-pix2pix
 ```
-- For Conda users, we include a script `./scripts/conda_deps.sh` to install PyTorch and other libraries.
 
 ### 1. Speech2Spectrogram Conversion
 
