@@ -13,6 +13,8 @@ This PyTorch implementation produces results comparable to or better than our or
 
 
 **Speech Style Transfer using CycleGAN and Pix2Pix: [Paper](https://arxiv.org/ftp/arxiv/papers/1904/1904.09407.pdf)**
+
+
 <img src="https://github.com/sy2358/pytorch-CycleGAN-and-pix2pix/blob/master/imgs/compare_spectrograms.jpg" width="800"/>
 
 
