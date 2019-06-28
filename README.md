@@ -1,6 +1,6 @@
 <br><br><br>
 
-# CycleGAN and pix2pix in PyTorch for Speech Style Transfer
+# CycleGAN and pix2pix in PyTorch for Spectrogram Style Transfer and Speech Generation
 
 We provide PyTorch implementations for both unpaired and paired image-to-image translation.
 
