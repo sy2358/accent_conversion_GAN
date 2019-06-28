@@ -32,32 +32,6 @@ Image-to-Image Translation with Conditional Adversarial Networks
 In CVPR 2017. [[Bibtex]](http://people.csail.mit.edu/junyanz/projects/pix2pix/pix2pix.bib)
 
 
-## Other implementations
-### CycleGAN
-<p><a href="https://github.com/leehomyc/cyclegan-1"> [Tensorflow]</a> (by Harry Yang),
-<a href="https://github.com/architrathore/CycleGAN/">[Tensorflow]</a> (by Archit Rathore),
-<a href="https://github.com/vanhuyz/CycleGAN-TensorFlow">[Tensorflow]</a> (by Van Huy),
-<a href="https://github.com/XHUJOY/CycleGAN-tensorflow">[Tensorflow]</a> (by Xiaowei Hu),
-<a href="https://github.com/LynnHo/CycleGAN-Tensorflow-Simple"> [Tensorflow-simple]</a> (by Zhenliang He),
-<a href="https://github.com/luoxier/CycleGAN_Tensorlayer"> [TensorLayer]</a> (by luoxier),
-<a href="https://github.com/Aixile/chainer-cyclegan">[Chainer]</a> (by Yanghua Jin),
-<a href="https://github.com/yunjey/mnist-svhn-transfer">[Minimal PyTorch]</a> (by yunjey),
-<a href="https://github.com/Ldpe2G/DeepLearningForFun/tree/master/Mxnet-Scala/CycleGAN">[Mxnet]</a> (by Ldpe2G),
-<a href="https://github.com/tjwei/GANotebooks">[lasagne/keras]</a> (by tjwei)</p>
-</ul>
-
-### pix2pix
-<p><a href="https://github.com/affinelayer/pix2pix-tensorflow"> [Tensorflow]</a> (by Christopher Hesse),
-<a href="https://github.com/Eyyub/tensorflow-pix2pix">[Tensorflow]</a> (by Eyyüb Sariu),
-<a href="https://github.com/datitran/face2face-demo"> [Tensorflow (face2face)]</a> (by Dat Tran),
-<a href="https://github.com/awjuliani/Pix2Pix-Film"> [Tensorflow (film)]</a> (by Arthur Juliani),
-<a href="https://github.com/kaonashi-tyc/zi2zi">[Tensorflow (zi2zi)]</a> (by Yuchen Tian),
-<a href="https://github.com/pfnet-research/chainer-pix2pix">[Chainer]</a> (by mattya),
-<a href="https://github.com/tjwei/GANotebooks">[tf/torch/keras/lasagne]</a> (by tjwei),
-<a href="https://github.com/taey16/pix2pixBEGAN.pytorch">[Pytorch]</a> (by taey16)
-</p>
-</ul>
-
 ## Prerequisites
 - Linux or macOS
 - Python 2 or 3
@@ -114,49 +88,6 @@ The test results will be saved to a html file here: `./results/facades_pix2pix/t
 
 You can find more scripts at `scripts` directory.
 
-### Apply a pre-trained model (CycleGAN)
-- You can download a pretrained model (e.g. horse2zebra) with the following script:
-```bash
-bash ./scripts/download_cyclegan_model.sh horse2zebra
-```
-The pretrained model is saved at `./checkpoints/{name}_pretrained/latest_net_G.pth`. Check [here](https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix/blob/master/scripts/download_cyclegan_model.sh#L3) for all the available CycleGAN models.
-- To test the model, you also need to download the  horse2zebra dataset:
-```bash
-bash ./datasets/download_cyclegan_dataset.sh horse2zebra
-```
-
-- Then generate the results using
-```bash
-python test.py --dataroot datasets/horse2zebra/testA --name horse2zebra_pretrained --model test
-```
-The option `--model test` is used for generating results of CycleGAN only for one side. `python test.py --model cycle_gan` will require loading and generating results in both directions, which is sometimes unnecessary. The results will be saved at `./results/`. Use `--results_dir {directory_path_to_save_result}` to specify the results directory.
-
-- If you would like to apply a pre-trained model to a collection of input images (rather than image pairs), please use `--dataset_mode single` and `--model test` options. Here is a script to apply a model to Facade label maps (stored in the directory `facades/testB`).
-``` bash
-#!./scripts/test_single.sh
-python test.py --dataroot ./datasets/facades/testB/ --name {your_trained_model_name} --model test
-```
-You might want to specify `--netG` to match the generator architecture of the trained model.
-
-### Apply a pre-trained model (pix2pix)
-
-Download a pre-trained model with `./scripts/download_pix2pix_model.sh`.
-
-- Check [here](https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix/blob/master/scripts/download_pix2pix_model.sh#L3) for all the available pix2pix models. For example, if you would like to download label2photo model on the Facades dataset,
-```bash
-bash ./scripts/download_pix2pix_model.sh facades_label2photo
-```
-- Download the pix2pix facades datasets:
-```bash
-bash ./datasets/download_pix2pix_dataset.sh facades
-```
-- Then generate the results using
-```bash
-python test.py --dataroot ./datasets/facades/ --direction BtoA --model pix2pix --name facades_label2photo_pretrained
-```
-Note that we specified `--direction BtoA` as Facades dataset's A to B direction is photos to labels.
-
-- See a list of currently available models at `./scripts/download_pix2pix_model.sh`
 
 ## [Datasets](docs/datasets.md)
 Download pix2pix/CycleGAN datasets and create your own datasets.
@@ -169,8 +100,16 @@ Before you post a new question, please first look at the above Q & A and existin
 
 
 ## Citation
-If you use this code for your research, please cite our papers.
+If you use this code for your research, please cite the following papers.
 ```
+
+@inproceedings{Yang2019,
+  title={Self-imitating Feedback Generation Using GAN for Computer-Assisted Pronunciation Training},
+  author={Yang, Seung Hee, and Chung, Minhwa},
+  booktitle={Interspeech, 2019 IEEE International Conference on},
+  year={2019}
+}
+
 @inproceedings{CycleGAN2017,
   title={Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial Networkss},
   author={Zhu, Jun-Yan and Park, Taesung and Isola, Phillip and Efros, Alexei A},
@@ -188,15 +127,5 @@ If you use this code for your research, please cite our papers.
 ```
 
 
-
-## Related Projects
-**[CycleGAN-Torch](https://github.com/junyanz/CycleGAN) |
-[pix2pix-Torch](https://github.com/phillipi/pix2pix) | [pix2pixHD](https://github.com/NVIDIA/pix2pixHD) |
-[iGAN](https://github.com/junyanz/iGAN) |
-[BicycleGAN](https://github.com/junyanz/BicycleGAN)**
-
-## Cat Paper Collection
-If you love cats, and love reading cool graphics, vision, and learning papers, please check out the Cat Paper [Collection](https://github.com/junyanz/CatPapers).
-
 ## Acknowledgments
-Our code is inspired by [pytorch-DCGAN](https://github.com/pytorch/examples/tree/master/dcgan).
+Our code comes from [CycleGAN](https://github.com/junyanz/CycleGAN) and [Pix2Pix](https://github.com/phillipi/pix2pix), which are inspired by [pytorch-DCGAN](https://github.com/pytorch/examples/tree/master/dcgan).
