@@ -10,15 +10,12 @@ This PyTorch implementation produces results comparable to or better than our or
 
 **Note**: The current software works well with PyTorch 0.4+. Check out the older [branch](https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix/tree/pytorch0.3.1) that supports PyTorch 0.1-0.3.
 
-You may find useful information in [training/test tips](docs/tips.md) and [frequently asked questions](docs/qa.md).
 
-**CycleGAN: [Project](https://junyanz.github.io/CycleGAN/) |  [Paper](https://arxiv.org/pdf/1703.10593.pdf) |  [Torch](https://github.com/junyanz/CycleGAN)**
+
+**Speech Style Transfer using CycleGAN and Pix2Pix: [Paper](https://arxiv.org/ftp/arxiv/papers/1904/1904.09407.pdf)**
 <img src="https://junyanz.github.io/CycleGAN/images/teaser_high_res.jpg" width="800"/>
 
 
-**Pix2pix:  [Project](https://phillipi.github.io/pix2pix/) |  [Paper](https://arxiv.org/pdf/1611.07004.pdf) |  [Torch](https://github.com/phillipi/pix2pix)**
-
-<img src="https://phillipi.github.io/pix2pix/images/teaser_v3.png" width="800px"/>
 
 
 **[EdgesCats Demo](https://affinelayer.com/pixsrv/) | [pix2pix-tensorflow](https://github.com/affinelayer/pix2pix-tensorflow) | by [Christopher Hesse](https://twitter.com/christophrhesse)**
