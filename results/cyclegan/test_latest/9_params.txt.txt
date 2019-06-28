@@ -1,0 +1,9 @@
+0.008166
+170
+70
+5000
+128
+512
+16000
+data/test_cleanr/NN/CN124s3_159.wav
+test/CN124s3_159_params.txt
