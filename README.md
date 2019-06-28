@@ -71,8 +71,8 @@ see results on the training data in the following directory:
 python3 test.py —dataroot data/CycleGan_data/ —name cyclegan —model cycle_gan —no_flip —loadSize 256 —fineSize 256 —num_test 200 —no_dropout —results_dir test_results/
 ```
 
-## [Datasets](docs/datasets.md)
-Download pix2pix/CycleGAN datasets and create your own datasets.
+## [Datasets]
+Speech recordings before and after style transfer. For instance, S. Lee, and J. Chang, “Design and Construction of Speech Corpus for Korean as a Foreign Language (L2KSC),” The Journal of Chinese Language and Literature, vol. 33, 2005, pp. 35-53.
 
 ## [Training/Test Tips](docs/tips.md)
 Best practice for training and testing your models.
