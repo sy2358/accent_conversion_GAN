@@ -88,7 +88,7 @@ python3 ..resize.py --in_file results/cyclegan/test_latest/images/9_real_A.png -
 
 ### 4. Rebuild the Waveform
 ```bash
-build-wav-from-melspec.py --in_file results/cyclegan/test_latest/images/9_real_A_resized.png --param_file ~/test/9_params.txt --out_file results/cyclegan/test_latest/images/9_real_A-rebuild.wav --iterations 1000
+build-wav-from-melspec.py --in_file results/cyclegan/test_latest/images/9_real_A_resized.png --param_file results/cyclegan/test_latest/9_params.txt --out_file results/cyclegan/test_latest/images/9_real_A-rebuild.wav --iterations 1000
 ```
 
 
