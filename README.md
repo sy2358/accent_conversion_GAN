@@ -1,6 +1,6 @@
 <br><br><br>
 
-# CycleGAN and pix2pix in PyTorch for Spectrogram Style Transfer and Speech Generation
+# CycleGAN in PyTorch for Spectrogram Style Transfer and Speech Generation
 
 We provide PyTorch implementations for both unpaired and paired image-to-image translation.
 
@@ -26,11 +26,7 @@ Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial Networks
 [Jun-Yan Zhu](https://people.eecs.berkeley.edu/~junyanz/)\*,  [Taesung Park](https://taesung.me/)\*, [Phillip Isola](https://people.eecs.berkeley.edu/~isola/), [Alexei A. Efros](https://people.eecs.berkeley.edu/~efros)
 In ICCV 2017. (* equal contributions) [[Bibtex]](https://junyanz.github.io/CycleGAN/CycleGAN.txt)
 
-
-Image-to-Image Translation with Conditional Adversarial Networks
-[Phillip Isola](https://people.eecs.berkeley.edu/~isola), [Jun-Yan Zhu](https://people.eecs.berkeley.edu/~junyanz), [Tinghui Zhou](https://people.eecs.berkeley.edu/~tinghuiz), [Alexei A. Efros](https://people.eecs.berkeley.edu/~efros)
-In CVPR 2017. [[Bibtex]](http://people.csail.mit.edu/junyanz/projects/pix2pix/pix2pix.bib)
-
+Griffin D. and Lim J. (1984). "Signal Estimation from Modified Short-Time Fourier Transform". IEEE Transactions on Acoustics, Speech and Signal Processing. 32 (2): 236–243. doi:10.1109/TASSP.1984.1164317
 
 ## Prerequisites
 - Linux or macOS
@@ -45,49 +41,35 @@ pip install -r requirements.txt
 ```
 - Clone this repo:
 ```bash
-git clone https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix
+git clone https://github.com/sy2358/pytorch-CycleGAN-and-pix2pix
 cd pytorch-CycleGAN-and-pix2pix
 ```
 - For Conda users, we include a script `./scripts/conda_deps.sh` to install PyTorch and other libraries.
 
-### CycleGAN train/test
-- Download a CycleGAN dataset (e.g. maps):
+### 1. Speech2Spectrogram Conversion
+
+The provided code shows an example usage of the Griffin and Lim algorithm. It loads an audio file, computes the spectrogram, optionally performs low-pass filtering by zeroing all frequency bins above some cutoff frequency, and then uses the Griffin and Lim algorithm to reconstruct an audio signal from the modified spectrogram. Finally, both the reconstructed audio signal and the spectrogram plot figure are saved to a file.
+
 ```bash
-bash ./datasets/download_cyclegan_dataset.sh maps
+python3 build-melspec-from-wav.py --in_file ../data/CN221s3_219.wav --sample_rate_hz 16000 --fft_size 512 --overlap_ratio 3 --mel_bin_count 128 --max_freq_hz 5000 --pad_length 24000
 ```
+It generates 128x128 gray and colour spectrogram images. 
+
+### 2. CycleGAN train/test
+
 - Train a model:
 ```bash
-#!./scripts/train_cyclegan.sh
-python train.py --dataroot ./datasets/maps --name maps_cyclegan --model cycle_gan
+python3 train.py —dataroot data/CycleGan_data —name cyclegan —model cycle_gan —no_flip —resize_or_crop none —loadSize 128 —fineSize 128
 ```
 - To view training results and loss plots, run `python -m visdom.server` and click the URL http://localhost:8097. To see more intermediate results, check out `./checkpoints/maps_cyclegan/web/index.html`
+
+see results on the training data in the following directory:
+~/pytorch-CycleGAN-and-pix2pix/checkpoints/cyclegan/web/images
+
 - Test the model:
 ```bash
-#!./scripts/test_cyclegan.sh
-python test.py --dataroot ./datasets/maps --name maps_cyclegan --model cycle_gan
+python3 test.py —dataroot data/CycleGan_data/ —name cyclegan —model cycle_gan —no_flip —loadSize 256 —fineSize 256 —num_test 200 —no_dropout —results_dir test_results/
 ```
-The test results will be saved to a html file here: `./results/maps_cyclegan/latest_test/index.html`.
-
-### pix2pix train/test
-- Download a pix2pix dataset (e.g.facades):
-```bash
-bash ./datasets/download_pix2pix_dataset.sh facades
-```
-- Train a model:
-```bash
-#!./scripts/train_pix2pix.sh
-python train.py --dataroot ./datasets/facades --name facades_pix2pix --model pix2pix --direction BtoA
-```
-- To view training results and loss plots, run `python -m visdom.server` and click the URL http://localhost:8097. To see more intermediate results, check out  `./checkpoints/facades_pix2pix/web/index.html`
-- Test the model (`bash ./scripts/test_pix2pix.sh`):
-```bash
-#!./scripts/test_pix2pix.sh
-python test.py --dataroot ./datasets/facades --name facades_pix2pix --model pix2pix --direction BtoA
-```
-The test results will be saved to a html file here: `./results/facades_pix2pix/test_latest/index.html`.
-
-You can find more scripts at `scripts` directory.
-
 
 ## [Datasets](docs/datasets.md)
 Download pix2pix/CycleGAN datasets and create your own datasets.
@@ -97,6 +79,17 @@ Best practice for training and testing your models.
 
 ## [Frequently Asked Questions](docs/qa.md)
 Before you post a new question, please first look at the above Q & A and existing GitHub issues.
+
+
+### 3. Resize the Generated Images to 128x128 for Conversion back to Sound
+```bash
+python3 ..resize.py --in_file results/cyclegan/test_latest/images/9_real_A.png --resize_file results/cyclegan/test_latest/images/9_real_A_resized.png --resize 128 128
+```
+
+### 4. Rebuild the Waveform
+```bash
+build-wav-from-melspec.py --in_file results/cyclegan/test_latest/images/9_real_A_resized.png --param_file ~/test/9_params.txt --out_file results/cyclegan/test_latest/images/9_real_A-rebuild.wav --iterations 1000
+```
 
 
 ## Citation
@@ -117,15 +110,8 @@ If you use this code for your research, please cite the following papers.
   year={2017}
 }
 
-
-@inproceedings{isola2017image,
-  title={Image-to-Image Translation with Conditional Adversarial Networks},
-  author={Isola, Phillip and Zhu, Jun-Yan and Zhou, Tinghui and Efros, Alexei A},
-  booktitle={Computer Vision and Pattern Recognition (CVPR), 2017 IEEE Conference on},
-  year={2017}
-}
 ```
 
 
 ## Acknowledgments
-Our code comes from [CycleGAN](https://github.com/junyanz/CycleGAN) and [Pix2Pix](https://github.com/phillipi/pix2pix), which are inspired by [pytorch-DCGAN](https://github.com/pytorch/examples/tree/master/dcgan).
+Our code comes from [CycleGAN](https://github.com/junyanz/CycleGAN) and [Pix2Pix](https://github.com/phillipi/pix2pix), which are inspired by [pytorch-DCGAN](https://github.com/pytorch/examples/tree/master/dcgan), and from [Griffin_Lim](https://github.com/bkvogel/griffin_lim).
