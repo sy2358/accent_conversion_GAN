@@ -22,7 +22,7 @@ This PyTorch implementation produces results comparable to or better than our or
 
 If you use this code for your research, please cite:
 
-Self-imitating Feedback Generation Using GAN for Computer-Assisted Pronunciation Training. Seung Hee Yang and Minhwa Chung (2019) https://arxiv.org/abs/1904.09407. (To be published in Proceedings of INTERSPEECH 2019, Graz, Austria).
+Seung Hee Yang & Minhwa Chung (2019). Self-imitating Feedback Generation Using GAN for Computer-Assisted Pronunciation Training. https://arxiv.org/abs/1904.09407. Proceedings of INTERSPEECH 2019, Graz, Austria.
 
 Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial Networks
 [Jun-Yan Zhu](https://people.eecs.berkeley.edu/~junyanz/)\*,  [Taesung Park](https://taesung.me/)\*, [Phillip Isola](https://people.eecs.berkeley.edu/~isola/), [Alexei A. Efros](https://people.eecs.berkeley.edu/~efros)
